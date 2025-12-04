@@ -1,0 +1,58 @@
+
+
+/*---------------------- *\
+ * - Vriables
+\* --------------------- */
+
+
+:root {
+
+}
+
+
+
+/*---------------------- *\
+ * - Globall
+\* --------------------- */
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Small  */
+
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+/* Midum  */
+
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+/* large */
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+/* Extra large */
+
+@media (min-width: 1300px) {
+  .container {
+    width: 1300px;
+  }
+}
+
+
+/*---------------------- *\
+ * - Start Home
+\* --------------------- */
