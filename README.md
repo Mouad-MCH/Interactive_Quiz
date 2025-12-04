@@ -60,5 +60,5 @@
 ### Étapes d'installation
 1. **Télécharger le projet**
    ```bash
-   git clone https://github.com/votre-username/quiz-interactif.git](https://github.com/Mouad-MCH/Interactive_Quiz.git
+   git clone https://github.com/Mouad-MCH/Interactive_Quiz.git]
    cd Interactive_Quiz
