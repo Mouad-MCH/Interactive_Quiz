@@ -6,6 +6,35 @@
 
 
 :root {
+  /* gradient color */
+
+  --gradient-color-1: leaner-gradiant(to right, #f2709c,#ff9472);
+
+  /* colors */
+
+  --botton-color: #2D2942;
+  --text-color: #2A2640;
+  --p-color: #585184;
+
+  --green-color: #7CCCBA;
+  --green-ligth-color: #DAF2EC;
+
+  --brown-color: #FDE7BA;
+  --brown-ligth-color: #FFFBF1;
+
+  --pink-color: #FFA5E1;
+  --pink-ligth-color: #FAD4EC;
+
+  /* size */
+
+  --title-size: 30px;
+  --p-size: 12px;
+
+  /* weight */
+
+  --font-900: 900;
+  --font--500: 500;
+  
 
 }
 
@@ -54,5 +83,6 @@
 
 
 /*---------------------- *\
- * - Start Home
+ * ----- PROFILE ---------
 \* --------------------- */
+
