@@ -115,6 +115,7 @@ let questions_Java = [
 
 const take_Quiz_btn = document.getElementById("btn_take");
 const list = document.getElementById("list");
+const li = document.querySelectorAll(".sidebare .list li")
 
 
 const questionElement = document.getElementById("question");
@@ -129,9 +130,9 @@ const nextButton = document.getElementById("next");
  * - Variables
 \* --------------------- */
 
-let currentQuestionIndex =0;
-let score =0;
-
+let currentQuestionIndex = 0;
+let score = 0;
+let Q;
 
 
 /*---------------------- *\
@@ -154,58 +155,95 @@ function take() {
 /*  **********************************************  */
 
 
-
-
-function startQuiz(){
-    currentQuestionIndex=0;
-    score=0;
-    nextButton.innerHTML="Next";
-    showQuestion(questions_Html);
-}
-
-
-function showQuestion(questions){
-    resetState();
-    let currentQuestion = questions[currentQuestionIndex];
-    let questionNo = currentQuestionIndex +1;
-    questionElement.innerHTML=questionNo +"."+ currentQuestion.question;
-    currentQuestion.answers.forEach(answer => {
-        const button = document.createElement("button");
-        button.innerHTML = answer.text;
-        button.classList.add("btn");
-        answerButtons.appendChild(button);
-        if(answer.correct){
-           button.dataset.correct=answer.correct;
+Array.from(list.children).forEach(el => {
+    el.addEventListener("click" , (e) => {
+        console.log(e.target.type)
+        if(e.target.type == "html") {
+            Q = questions_Html;
         }
-        button.addEventListener("click",selectAnswer);
     })
+})
+
+
+list.forEach(el => {
+    el.addEventListener('click', (e)=> {
+       console.log(el)
+    })
+    // if(window.location == "home.html") {
+    // Q = questions_Html
+})
+
+ 
+
+
+function startQuiz() {
+    currentIndex = 0;
+    score = 0;
+    showQuestion(Q);
 }
 
+function showQuestion(questions) {
+    resetState();
 
-function resetState(){
-    nextButton.style.display ="none"
-    while(answerButtons.firstChild){
-        answerButtons.removeChild(answerButtons.firstChild);
-    }
-}
+    let currentQuestion = questions[currentIndex];
+    questionElement.textContent = (currentIndex + 1) + ". " + currentQuestion.question;
 
+    currentQuestion.answers.forEach(answer => {
+        const btn = document.createElement("button");
+        btn.textContent = answer.text;
+        btn.classList.add("btn");
 
-function selectAnswer(e){
-    const selectedBtn= e.target;
-    const isCorrect = selectedBtn.dataset.correct==="true";
-    if(isCorrect){
-        selectedBtn.classList.add("correct");
-    }else{
-        selectedBtn.classList.add("incorrect");
-    }
-    Array.from(answerButtons.children).forEach(button =>{
-        if(button.dataset.correct ==="true"){
-          button.classList.add("corr;ect")
+        if (answer.correct) {
+            btn.dataset.correct = "true";
         }
-        button.disabled = true;
+
+        btn.addEventListener("click", selectAnswer);
+        answerButtons.appendChild(btn);
     });
-    nextButton.style.display="block";
 }
+
+
+function resetState() {
+    nextButton.style.display = "none";
+    answerButtons.innerHTML = "";
+}
+
+
+
+function selectAnswer(e) {
+    const selected = e.target;
+    const correct = selected.dataset.correct === "true";
+
+    if (correct) {
+        selected.classList.add("correct");
+        score++;
+    } else {
+        selected.classList.add("incorrect");
+    }
+
+    Array.from(answerButtons.children).forEach(btn => {
+        if (btn.dataset.correct === "true") {
+            btn.classList.add("correct");
+        }
+        btn.disabled = true;
+    });
+
+    nextButton.style.display = "block";
+}
+
+
+nextButton.addEventListener("click", () => {
+    currentIndex++;
+
+    if (currentIndex < Q.length) {
+        showQuestion(Q);
+    }
+    else {
+        window.location.href = "home.html"
+    }
+    
+});
+// Function next Question
 
 
 startQuiz();
