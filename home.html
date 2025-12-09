@@ -3,7 +3,7 @@
 <head>
  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Profile</title>
+  <title>Home</title>
   <!-- file css  -->
   <link rel="stylesheet" href="css/style.css">
   <!-- normalize css file -->
@@ -23,28 +23,26 @@
     <div class="sidebar">
       <div class="sidevar_top">
         <!-- TOP sidebar -->
-         <div class="head">
-          <i class="fa-solid fa-file left_move"></i>
-           Logo 
-           <i class="fa-solid fa-arrow-left right_move"></i>
+        <div class="head">
+          <i class="fa-solid fa-file left_move"></i>Logo<i class="fa-solid fa-arrow-left right_move"></i>
           </div>
 
           <!-- Button Home and Take Quiz -->
 
           <div class="buttons">
             <a href="home.html"  class="home_btn" >Home</a>
-            <button class="take_btn" id="btn_take">Take Quiz</button>
+            <button onclick="take()" class="take_btn" id="btn_take">Take Quiz</button>
           </div>
 
 
           <!-- List Quiz -->
 
-         <ul class="list" id="list">
-        <li class="active"><a href="#"><i class="fa-brands fa-html5"></i> Html</a></li>
-        <li><a href="#"><i class="fa-brands fa-java"></i> Java</a></li>
-        <li><a href="quize.html" type="js"><i class="fa-brands fa-js"></i> JavaScript</a></li>
-        <li><a href="#"><i class="fa-brands fa-css3-alt"></i> Css</a></li>
-         </ul>
+        <ul class="list" id="list">
+          <li class="active"><a type="html"><i class="fa-brands fa-html5"></i> Html</a></li>
+          <li><a href="#" type="java"><i class="fa-brands fa-java"></i> Java</a></li>
+          <li><a href="quize.html" type="js"><i class="fa-brands fa-js"></i> JavaScript</a></li>
+          <li><a href="#" type="css"><i class="fa-brands fa-css3-alt"></i> Css</a></li>
+        </ul>
       </div>
 
       <!-- buttom sidebar -->
@@ -106,7 +104,7 @@
             <div class="box21">
                 <h3>Score</h3>
                 <!--put here score ---------------------------------------->
-                <i class="fa-solid fa-gauge-high">: ##</i>
+                <i class="fa-solid fa-gauge-high" id="score">: ##</i>
             </div>
             <div class="box21">
               <h3>games win</h3>

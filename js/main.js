@@ -114,7 +114,7 @@ let questions_Java = [
 
 
 const take_Quiz_btn = document.getElementById("btn_take");
-const list = document.getElementById("list");
+//const list = document.getElementById("list");
 const li = document.querySelectorAll(".sidebare .list li")
 
 
@@ -124,23 +124,25 @@ const nextButton = document.getElementById("next");
 
 
 
-
-
 /*---------------------- *\
  * - Variables
 \* --------------------- */
 
-let currentQuestionIndex = 0;
-let score = 0;
-let Q;
 
+let currentIndex = 0;
+let score = 0;
+let Q = [];
 
 /*---------------------- *\
  * - Function
 \* --------------------- */
 
 
+
+
 /* ************* Take button *********************** */
+
+
 
 function take() {
     take_Quiz_btn.classList.toggle('active')
@@ -153,39 +155,62 @@ function take() {
 }
 
 /*  **********************************************  */
+    
+function initApp() {
+    const list = document.querySelectorAll("#list");
+    
+    if (!list) {
+        console.error("List element not found!");
+        return; // Exit if element doesn't exist
+    }
+}
+initApp();
+
+// Array.from(list.children).forEach(el => {
+//     el.addEventListener("click" , (e) => {
+
+//         e.stopPropagation();
+//         const link = el.querySelector("a");
+//         const type = link.getAttribute("type");
+
+//         console.log(type)
+//         if (type === "html") {
+//             localStorage.setItem("selectedQuiz", "html");
+//             localStorage.setItem("quizQuestions", JSON.stringify(questions_Html));
+//             window.location.href = "quize.html";
+//         } else if (type === "java") {
+//             localStorage.setItem("selectedQuiz", "java");
+//             localStorage.setItem("quizQuestions", JSON.stringify(questions_Java));
+//             window.location.href = "quize.html";
+//         } 
+//     })
+// });
 
 
-Array.from(list.children).forEach(el => {
-    el.addEventListener("click" , (e) => {
-        console.log(e.target.type)
-        if(e.target.type == "html") {
-            Q = questions_Html;
-        }
-    })
+document.addEventListener("DOMContentLoaded", () => {
+  const selectedQuiz = localStorage.getItem("selectedQuiz");
+  const storedQuestions = localStorage.getItem("quizQuestions");
+    Q = JSON.parse(storedQuestions);
+    if (window.location.pathname.includes("quize.html") || window.location.pathname.endsWith("quize.html")) {
+        startQuiz();
+    }
 })
-
-
-list.forEach(el => {
-    el.addEventListener('click', (e)=> {
-       console.log(el)
-    })
-    // if(window.location == "home.html") {
-    // Q = questions_Html
-})
-
- 
 
 
 function startQuiz() {
     currentIndex = 0;
     score = 0;
-    showQuestion(Q);
+    nextButton.innerHTML = "Next";
+    showQuestion();
 }
 
-function showQuestion(questions) {
-    resetState();
 
-    let currentQuestion = questions[currentIndex];
+
+
+
+function showQuestion() {
+    resetState();
+    let currentQuestion = Q[currentIndex];
     questionElement.textContent = (currentIndex + 1) + ". " + currentQuestion.question;
 
     currentQuestion.answers.forEach(answer => {
@@ -232,6 +257,7 @@ function selectAnswer(e) {
 }
 
 
+
 nextButton.addEventListener("click", () => {
     currentIndex++;
 
@@ -239,11 +265,28 @@ nextButton.addEventListener("click", () => {
         showQuestion(Q);
     }
     else {
-        window.location.href = "home.html"
+        localStorage.setItem("Score", score);
+        
+        window.location.href = "home.html";
     }
     
 });
+
+
+// *********** Add Score to Home Page **************
+
+let html_score = document.getElementById("score")
+
+score = localStorage.getItem("Score");
+
+html_score.textContent = `: ${score} / ${Q.length} `
+
+
+
+
 // Function next Question
 
 
 startQuiz();
+
+
