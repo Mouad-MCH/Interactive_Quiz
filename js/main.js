@@ -114,7 +114,7 @@ let questions_Java = [
 
 
 const take_Quiz_btn = document.getElementById("btn_take");
-//const list = document.getElementById("list");
+const list = document.getElementById("list");
 const li = document.querySelectorAll(".sidebare .list li")
 
 
@@ -156,35 +156,39 @@ function take() {
 
 /*  **********************************************  */
     
-function initApp() {
-    const list = document.querySelectorAll("#list");
+// function initApp() {
+//     const list = document.querySelectorAll("#list");
     
-    if (!list) {
-        console.error("List element not found!");
-        return; // Exit if element doesn't exist
-    }
+//     if (!list) {
+//         console.error("List element not found!");
+//         return; // Exit if element doesn't exist
+//     }
+// }
+// initApp();
+
+function addQuestion(el) {
+    el.addEventListener("click" , (e) => {
+
+        // e.stopPropagation();
+        // const link = el.querySelector("a");
+        // const type = link.getAttribute("type");
+
+        const type = e.target.type
+
+        console.log(type)
+
+        console.log(type)
+        if (type === "html") {
+            localStorage.setItem("selectedQuiz", "html");
+            localStorage.setItem("quizQuestions", JSON.stringify(questions_Html));
+            window.location.href = "quize.html";
+        } else if (type === "java") {
+            localStorage.setItem("selectedQuiz", "java");
+            localStorage.setItem("quizQuestions", JSON.stringify(questions_Java));
+            window.location.href = "quize.html";
+        } 
+    })
 }
-initApp();
-
-// Array.from(list.children).forEach(el => {
-//     el.addEventListener("click" , (e) => {
-
-//         e.stopPropagation();
-//         const link = el.querySelector("a");
-//         const type = link.getAttribute("type");
-
-//         console.log(type)
-//         if (type === "html") {
-//             localStorage.setItem("selectedQuiz", "html");
-//             localStorage.setItem("quizQuestions", JSON.stringify(questions_Html));
-//             window.location.href = "quize.html";
-//         } else if (type === "java") {
-//             localStorage.setItem("selectedQuiz", "java");
-//             localStorage.setItem("quizQuestions", JSON.stringify(questions_Java));
-//             window.location.href = "quize.html";
-//         } 
-//     })
-// });
 
 
 document.addEventListener("DOMContentLoaded", () => {
